@@ -288,6 +288,19 @@ export const CARD_MENU = [
             isAvailable: 'settings.unsplash'
         },
         {
+            label: 'Decklist',
+            icon: 'koenig/kg-card-type-unsplash',
+            desc: '/Decklist',
+            iconClass: 'kg-card-type-unsplash',
+            matches: ['unsplash'],
+            type: 'card',
+            replaceArg: 'image',
+            params: ['searchTerm'],
+            payload: {
+                imageSelector: 'unsplash'
+            },
+        },
+        {
             label: 'Vimeo',
             icon: 'koenig/kg-card-type-vimeo',
             desc: '/vimeo [video url]',

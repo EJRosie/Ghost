@@ -75,7 +75,7 @@ export default class KoenigCardImage extends Component {
         let selector = this.payload.imageSelector;
         let imageSelectors = {
             unsplash: {
-                component: 'gh-unsplash',
+                component: 'ejrosie-decklist',
                 type: 'modal'
             },
             tenor: {

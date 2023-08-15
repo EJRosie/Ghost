@@ -1,0 +1,117 @@
+{{#in-element (query-selector "#decklist-wormhole")}}
+    {{!-- TODO: why does this modal background not cover the PSM without style override? --}}
+    <div class="fullscreen-modal-background" role="button" {{on "click" @close}} style="z-index: 999"></div>
+    <div
+        class="absolute top-8 right-8 bottom-8 left-8 br4 overflow-hidden bg-white z-9999"
+        {{on-resize this.handleResize}}
+        {{on-key "Escape" this.handleEscape}}
+    >
+        {{!-- close button --}}
+        <button type="button" class="absolute top-6 right-6" {{on "click" @close}}>
+            {{svg-jar "close" class="w4 stroke-midlightgrey-l2"}}
+        </button>
+
+        <div class="flex flex-column h-100">
+            {{!-- static header --}}
+            <header class="flex-shrink-0 flex flex-row-l flex-column justify-between pt6 pr8 pb6 pl8 pt10-l pr20-l pb10-l pl20-l items-center">
+                <h1 class="flex items-center darkgrey-d2 w-100 nudge-top--4">
+                    <input
+                        type="text"
+                        class="gh-unsplash-search"
+                        name="Decklist Name"
+                        placeholder="Decklist Name"
+                        tabindex="0"
+                        autocorrect="off"
+                        value={{readonly this.decklist.decklistName}}
+                        aria-label="Search Unsplash photos"
+                        {{on "input" this.search}}
+                        {{on-key "Escape" this.clearSearch}}
+                        {{autofocus}}
+                    />
+                </h1>
+                <span class="gh-input-icon mw88-l flex-auto w-100 mt3 mt0-l">
+                    {{svg-jar "search"}}
+                    <input
+                        type="text"
+                        class="ejrosie-decklist-search"
+                        name="searchKeyword"
+                        placeholder="Search free high-resolution photos"
+                        tabindex="0"
+                        autocorrect="off"
+                        value={{readonly this.searchTerm}}
+                        aria-label="Search Unsplash photos"
+                        {{on "input" this.search}}
+                        {{on-key "Enter" this.selectCard this.searchTerm}}
+                        {{on-key "Escape" this.clearSearch}}
+                        {{autofocus}}
+                    />
+                    {{!-- <p>{{this.shownCards}}</p> --}}
+                    {{#if this.shownCards}}
+                    <div id="scryfall-options" class="scryfall-searching-{{this.isSearching}}">
+                        {{#each this.shownCards as |card|}}
+                        <div class="scryfall-option" role="button" {{on "click" (fn this.selectCard card)}}>
+                            <span>{{card}}</span>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </span>
+            </header>
+
+            {{!-- content container --}}
+            <div class="relative h-100 overflow-hidden">
+                {{!-- scrollable image container --}}
+                <div class="overflow-auto h-100 w-100 pr8 pl8 pr20-l pl20-l">
+                    {{#if this.decklist.lands}}
+                        <h1>Lands</h1>
+                        {{#each this.decklist.lands as |card|}}
+                            <p key="{{card.name}}">{{card.count}}<span>{{card.name}}</span></p>
+                        {{/each}}
+                    {{/if}}
+                    {{#if this.decklist.creatures}}
+                        <h1>Creatures</h1>
+                        {{#each this.decklist.creatures as |card|}}
+                            <p>{{card.count}}<span>{{card.name}}</span></p>
+                        {{/each}}
+                    {{/if}}
+                    {{#if this.decklist.spells}}
+                        <h1>Instants & Sorceries</h1>
+                        {{#each this.decklist.spells as |card|}}
+                            <p>{{card.count}}<span>{{card.name}}</span></p>
+                        {{/each}}
+                    {{/if}}
+                    {{#if this.decklist.planeswalkers}}
+                        <h1>Planeswalkers</h1>
+                        {{#each this.decklist.planeswalkers as |card|}}
+                            <p>{{card.count}}<span>{{card.name}}</span></p>
+                        {{/each}}
+                    {{/if}}
+                    {{#if this.decklist.enchantments}}
+                        <h1>Enchantments</h1>
+                        {{#each this.decklist.enchantments as |card|}}
+                            <p>{{card.count}}<span>{{card.name}}</span></p>
+                        {{/each}}
+                    {{/if}}
+                    {{#if this.decklist.artifacts}}
+                        <h1>Artifacts</h1>
+                        {{#each this.decklist.artifacts as |card|}}
+                            <p>{{card.count}}<span>{{card.name}}</span></p>
+                        {{/each}}
+                    {{/if}}
+                    {{#if this.decklist.other}}
+                        <h1>Other</h1>
+                        {{#each this.decklist.other as |card|}}
+                            <p>{{card.count}}<span>{{card.name}}</span></p>
+                        {{/each}}
+                    {{/if}}
+                    {{#if this.decklist.sideboard}}
+                        <h1>Sideboard</h1>
+                        {{#each this.decklist.sideboard as |card|}}
+                            <p>{{card.count}}<span>{{card.name}}</span></p>
+                        {{/each}}
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+{{/in-element}}
