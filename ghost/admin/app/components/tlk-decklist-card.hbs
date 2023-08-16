@@ -1,0 +1,108 @@
+<KoenigCard
+    @env={{@env}}
+    @class={{concat (kg-style "container-card") " kg-button-card flex justify-center mih10 miw-100 relative"}}
+    @headerOffset={{@headerOffset}}
+    @toolbar={{this.toolbar}}
+    @payload={{@payload}}
+    @isSelected={{@isSelected}}
+    @isEditing={{@isEditing}}
+    @selectCard={{@selectCard}}
+    @deselectCard={{@deselectCard}}
+    @editCard={{@editCard}}
+    @hasEditMode={{true}}
+    @saveCard={{@saveCard}}
+    @saveAsSnippet={{@saveAsSnippet}}
+    @onLeaveEdit={{this.leaveEditMode}}
+    @addParagraphAfterCard={{@addParagraphAfterCard}}
+    @moveCursorToPrevSection={{@moveCursorToPrevSection}}
+    @moveCursorToNextSection={{@moveCursorToNextSection}}
+    @editor={{@editor}}
+    {{did-insert this.registerElement}}
+>
+<div class="tlk-decklist-card-container">
+        {{#if @isEditing}}
+            <span class="tlk-decklist-input-container gh-input-icon mw88-l flex-auto w-100 mt0-l mb2">
+                    {{svg-jar "search"}}
+                    <input
+                        type="text"
+                        class="tlk-decklist-search"
+                        name="searchKeyword"
+                        placeholder="Search for a card"
+                        tabindex="0"
+                        autocorrect="off"
+                        value={{readonly this.searchTerm}}
+                        aria-label="Search Unsplash photos"
+                        {{on "input" this.search}}
+                        {{on-key "Enter" this.addCardToDeck this.searchTerm}}
+                        {{on-key "Escape" this.clearSearch}}
+                        {{autofocus}}
+                    />
+                    <span class="tlk-decklist-sb-switch">
+                        <input
+                            type="radio"
+                            name="sideboard-switch"
+                            id="sideboard-switch-{{this.sideboardSwitch}}"
+                            class="gh-radio-button"
+                            value={{this.sideboardSwitch}}
+                            checked={{this.sideboardSwitch}}
+                            {{on "click" this.toggleSideboardSwitch}}
+                        >
+                        <label for="sideboard-switch-{{this.sideboardSwitch}}">SB</label>
+                    </span>
+                    {{#if this.shownCards}}
+                    <div id="scryfall-options" class="scryfall-searching-{{this.isSearching}}">
+                        {{#each this.shownCards as |card|}}
+                        <div class="scryfall-option" role="button" {{on "click" (fn this.addCardToDeck card)}}>
+                            <span>{{card}}</span>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </span>
+        {{/if}}
+    <div class="tlk-decklist-container bg-whitegrey-d2">
+        {{#if @isEditing}}
+            <span><strong>Name:</strong></span>
+            <input
+                type="text"
+                class="tlk-decklist-name"
+                name="decklistName"
+                placeholder="Name your decklist"
+                tabindex="0"
+                autocorrect="off"
+                value={{readonly @payload.decklistName}}
+                aria-label="Name your decklist"
+                {{on "input" this.setDecklistTitle}}
+            />
+        {{else}}
+            <h2>{{@payload.decklistName}}</h2>
+        {{/if}}
+        <div class="tlk-decklist-deck">
+            {{#each decklistForHandlebars as |category|}}
+                <div class="tlk-decklist-category">
+                <h3>{{category.label}}</h3>
+                {{#each category.cards as |card|}}
+                    <div class="tlk-decklist-card">
+                        <span class="tlk-card-count">{{card.count}}</span>
+                        {{card.name}}
+                        {{#if @isEditing}}
+                        <div class="tlk-decklist-card-edit">
+                            <button class="tlk-card-add" {{on "click" (fn this.addCount card.name category.key)}}>
+                                {{svg-jar "plus"}}<span class="sr-only">Add</span>
+                            </button>
+                            <button class="tlk-card-remove" {{on "click" (fn this.removeCount card.name category.key false)}}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><title>minus</title><path d="M19 13H5v-2h14v2z" stroke="currentColor"/></svg><span class="sr-only">Remove</span>
+                            </button>
+                            <button class="tlk-card-trash" {{on "click" (fn this.removeCount card.name category.key true)}}>
+                                {{svg-jar "trash"}}<span class="sr-only">Delete</span>
+                            </button>
+                        </div>
+                        {{/if}}
+                    </div>
+                {{/each}}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+</KoenigCard>

@@ -7,8 +7,7 @@ import {reject, resolve} from 'rsvp';
 import {task, taskGroup, timeout} from 'ember-concurrency';
 
 const ALL_CARDS_API = "https://api.scryfall.com/catalog/card-names";
-const API_URL = 'https://api.unsplash.com';
-const API_VERSION = 'v1';
+const SINGLE_CARD_API = "https://api.scryfall.com/cards/named";
 const DEBOUNCE_MS = 600;
 
 export default Service.extend({
@@ -40,7 +39,7 @@ export default Service.extend({
     },
 
     loadCardInfo(cardName) {
-        let url = `https://api.scryfall.com/cards/named?exact=${cardName}`;
+        let url = `${SINGLE_CARD_API}?exact=${cardName}`;
         return this._makeRequest(url);
     },
 
