@@ -646,6 +646,7 @@ export default class KoenigEditor extends Component {
             nextPosition = postEditor.insertPost(editor.range.head, post);
             postEditor.setRange(nextPosition);
         });
+        console.log("Replace with post?");
     }
 
     @action

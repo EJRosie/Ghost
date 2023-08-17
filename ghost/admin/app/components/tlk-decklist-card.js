@@ -142,14 +142,6 @@ export default class tlkDecklistComponent extends Component {
         this.element = element;
     }
 
-    handleTitleTab() {
-        let contentInput = this.element.querySelector('.kg-product-card-description .koenig-basic-html-textarea__editor');
-
-        if (contentInput) {
-            contentInput.focus();
-        }
-    }
-
     @action
     setDecklistTitle(event) {
         event.preventDefault();
@@ -254,7 +246,7 @@ export default class tlkDecklistComponent extends Component {
     }
     
 
-    _updatePayloadAttr(attr, value) {
+    _updatePayloadAttr(attr, value) {          
         let payload = this.args.payload;
 
         set(payload, attr, value);
