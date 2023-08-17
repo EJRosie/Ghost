@@ -55,7 +55,7 @@ module.exports = function content(options = {}) {
             break;
         }
         const cardName = mtgCard[0].slice(2,-2);
-        this.html = this.html.replace(mtgCard[0], `<a class="active:pointer-events-none cursor-default" href="https://deckbox.org/mtg/${cardName}">${cardName}</a>`); // tlk: this is a quick hack to get the MTG cards to link to deckbox.org
+        this.html = this.html.replace(mtgCard[0], `<a class="cardlink" href="https://deckbox.org/mtg/${cardName}">${cardName}</a>`); // tlk: this is a quick hack to get the MTG cards to link to deckbox.org
     }
 
     if (!_.isUndefined(this.access) && !this.access) {

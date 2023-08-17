@@ -170,6 +170,14 @@ export default class tlkDecklistComponent extends Component {
 
     @action
     addCardToDeck(card) {
+        if (!card) {
+            if (this.shownCards && this.shownCards.length > 0) {
+                card = this.shownCards[0];
+            }
+            else {
+                return;
+            }
+        }
         this.clearSearch();
         const cardInfo = this.scryfall.loadCardInfo(card).then(res => {
             this.processCard(card, res.type_line.toLowerCase());

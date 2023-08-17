@@ -21,22 +21,33 @@
 >
 <div class="tlk-decklist-card-container">
         {{#if @isEditing}}
-            <span class="tlk-decklist-input-container gh-input-icon mw88-l flex-auto w-100 mt0-l mb2">
+            <span class="tlk-decklist-input-container gh-input-icon mw88-lflex-auto w-100 mt0-l mb2">
                     {{svg-jar "search"}}
-                    <input
-                        type="text"
-                        class="tlk-decklist-search"
-                        name="searchKeyword"
-                        placeholder="Search for a card"
-                        tabindex="0"
-                        autocorrect="off"
-                        value={{readonly this.searchTerm}}
-                        aria-label="Search Unsplash photos"
-                        {{on "input" this.search}}
-                        {{on-key "Enter" this.addCardToDeck this.searchTerm}}
-                        {{on-key "Escape" this.clearSearch}}
-                        {{autofocus}}
-                    />
+                    <div class="w-100 flex-auto relative">
+                        <input
+                            type="text"
+                            class="tlk-decklist-search"
+                            name="searchKeyword"
+                            placeholder="Search for a card"
+                            tabindex="0"
+                            autocorrect="off"
+                            value={{readonly this.searchTerm}}
+                            aria-label="Search Unsplash photos"
+                            {{on "input" this.search}}
+                            {{on-key "Enter" (fn this.addCardToDeck null)}}
+                            {{on-key "Escape" this.clearSearch}}
+                            {{autofocus}}
+                        />
+                        {{#if this.shownCards}}
+                            <div id="scryfall-options" class="scryfall-searching-{{this.isSearching}}">
+                                {{#each this.shownCards as |card|}}
+                                <div class="scryfall-option" role="button" {{on "click" (fn this.addCardToDeck card)}}>
+                                    <span>{{card}}</span>
+                                </div>
+                                {{/each}}
+                            </div>
+                        {{/if}}
+                    </div>
                     <span class="tlk-decklist-sb-switch">
                         <input
                             type="radio"
@@ -49,15 +60,6 @@
                         >
                         <label for="sideboard-switch-{{this.sideboardSwitch}}">SB</label>
                     </span>
-                    {{#if this.shownCards}}
-                    <div id="scryfall-options" class="scryfall-searching-{{this.isSearching}}">
-                        {{#each this.shownCards as |card|}}
-                        <div class="scryfall-option" role="button" {{on "click" (fn this.addCardToDeck card)}}>
-                            <span>{{card}}</span>
-                        </div>
-                        {{/each}}
-                    </div>
-                    {{/if}}
                 </span>
         {{/if}}
     <div class="tlk-decklist-container bg-whitegrey-d2">
@@ -84,7 +86,7 @@
                 {{#each category.cards as |card|}}
                     <div class="tlk-decklist-card">
                         <span class="tlk-card-count">{{card.count}}</span>
-                        {{card.name}}
+                        <span class="tlk-card-name">{{card.name}}</span>
                         {{#if @isEditing}}
                         <div class="tlk-decklist-card-edit">
                             <button class="tlk-card-add" {{on "click" (fn this.addCount card.name category.key)}}>
