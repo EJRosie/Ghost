@@ -155,8 +155,14 @@ export default class tlkDecklistComponent extends Component {
     search(event) {
         event.preventDefault();
         const term = event.target.value;
-        const filter = this.allCards.filter((name) => name.toLowerCase().includes(term.toLowerCase())).slice(0,20);
-        this.shownCards = filter;
+        const filter = this.allCards.filter((name) => name.toLowerCase().includes(term.toLowerCase()));
+        const filterWithPerfectOnTop = filter.sort((a,b) => {
+            if (a.toLowerCase() === term.toLowerCase()) {
+                return -1;
+            }
+            return a - b;
+        }).slice(0,20);
+        this.shownCards = filterWithPerfectOnTop;
         this.isSearching = true;
         this.searchTerm = term;
     }

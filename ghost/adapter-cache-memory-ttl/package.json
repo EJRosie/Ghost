@@ -1,6 +1,6 @@
 {
     "name": "@tryghost/adapter-cache-memory-ttl",
-    "version": "0.0.0",
+    "version": "5.59.1-private",
     "repository": "https://github.com/TryGhost/Ghost/tree/main/packages/adapter-cache-memory-ttl",
     "author": "Ghost Foundation",
     "private": true,

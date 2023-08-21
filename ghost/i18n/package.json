@@ -1,6 +1,6 @@
 {
   "name": "@tryghost/i18n",
-  "version": "0.0.0",
+  "version": "5.59.1-private",
   "repository": "https://github.com/TryGhost/Ghost/tree/main/ghost/i18n",
   "author": "Ghost Foundation",
   "private": true,

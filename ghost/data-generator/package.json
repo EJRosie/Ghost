@@ -1,6 +1,6 @@
 {
   "name": "@tryghost/data-generator",
-  "version": "0.0.0",
+  "version": "5.59.1-private",
   "repository": "https://github.com/TryGhost/Ghost/tree/main/packages/data-generator",
   "author": "Ghost Foundation",
   "private": true,

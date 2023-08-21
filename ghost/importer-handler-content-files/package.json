@@ -1,6 +1,6 @@
 {
   "name": "@tryghost/importer-handler-content-files",
-  "version": "0.0.0",
+  "version": "5.59.1-private",
   "repository": "https://github.com/TryGhost/Ghost/tree/main/packages/importer-handler-content-files",
   "author": "Ghost Foundation",
   "private": true,

@@ -64,6 +64,7 @@
         {{/if}}
     <div class="tlk-decklist-container bg-whitegrey-d2">
         {{#if @isEditing}}
+            <div>
             <span><strong>Name:</strong></span>
             <input
                 type="text"
@@ -76,6 +77,19 @@
                 aria-label="Name your decklist"
                 {{on "input" this.setDecklistTitle}}
             />
+            <span><strong>Author:</strong></span>
+            <input
+                type="text"
+                class="tlk-decklist-player-name"
+                name="decklistPlayerName"
+                placeholder="Who made the decklist?"
+                tabindex="0"
+                autocorrect="off"
+                value={{readonly @payload.decklistName}}
+                aria-label="Who made the decklist?"
+                {{on "input" this.setDecklistTitle}}
+            />
+            </div>
         {{else}}
             <h2>{{@payload.decklistName}}</h2>
         {{/if}}

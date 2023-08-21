@@ -1,6 +1,6 @@
 {
   "name": "@tryghost/stats-service",
-  "version": "0.0.0",
+  "version": "5.59.1-private",
   "repository": "https://github.com/TryGhost/Ghost/tree/main/ghost/stats-service",
   "private": true,
   "author": "Ghost Foundation",

@@ -1,7 +1,7 @@
 {
   "name": "@tryghost/version-notifications-data-service",
   "private": true,
-  "version": "0.0.0",
+  "version": "5.59.1-private",
   "author": "Ghost Foundation",
   "license": "MIT",
   "main": "index.js",
