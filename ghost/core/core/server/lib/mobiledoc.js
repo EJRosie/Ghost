@@ -8,6 +8,18 @@ let cardFactory;
 let cards;
 let mobiledocHtmlRenderer;
 
+const DECKLIST_CATEGORIES_MAP = [
+    { key: "lands", label: "Lands"},
+    { key: "creatures", label: "Creatures"},
+    { key: "spells", label: "Instants & Sorceries"},
+    { key: "artifacts", label: "Artifacts"},
+    { key: "enchantments", label: "Enchantments"},
+    { key: "planeswalkers", label: "Planeswalkers"},
+    { key: "other", label: "Other"},
+    { key: "sideboard", label: "Sideboard"}
+  ]
+
+
 module.exports = {
     get blankDocument() {
         return {
@@ -63,6 +75,28 @@ module.exports = {
                 cards: this.cards,
                 atoms: this.atoms,
                 unknownCardHandler(args) {
+                    if (args.env.name === "decklist") {
+                        var dom = args.env.dom;
+                        var payload = args.payload;
+
+                        var container = args.env.dom.createElement('figure');
+                        container.setAttribute( "class", "tlk-decklist");
+
+                        const decklistCategories = DECKLIST_CATEGORIES_MAP.map((cat) => {
+                            if (cat.key in payload.decklist && Object.keys(payload.decklist[cat.key]).length > 0) {
+                                const title = dom.createElement('h3');
+                                title.appendChild(dom.createTextNode(cat.label));
+                                container.appendChild(title);
+                                Object.entries(payload.decklist[cat.key]).forEach(([cardname, count]) => {
+                                const cardElement = dom.createElement('p');
+                                cardElement.appendChild(dom.createTextNode(count + "x"));
+                                cardElement.appendChild(dom.createTextNode(`[[${cardname}]]`));
+                                container.appendChild(cardElement);
+                                });
+                            }
+                        });
+                        return container;
+                    }
                     logging.error(new errors.InternalServerError({
                         message: 'Mobiledoc card \'' + args.env.name + '\' not found.'
                     }));
