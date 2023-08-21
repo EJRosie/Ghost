@@ -971,9 +971,3 @@ h2 {
 .error-stack-function {
     font-weight: bold;
 }
-a.cardlink {
-    cursor: default !important;
-}
-a.cardlink:active {
-    pointer-events: none;
-}
