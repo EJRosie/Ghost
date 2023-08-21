@@ -83,7 +83,7 @@ module.exports = {
                         container.setAttribute( "class", "tlk-decklist");
 
                         const decklistCategories = DECKLIST_CATEGORIES_MAP.map((cat) => {
-                            if (cat.key in payload.decklist) {
+                            if (cat.key in payload.decklist && Object.keys(payload.decklist[cat.key]).length > 0) {
                                 const title = dom.createElement('h3');
                                 title.appendChild(dom.createTextNode(cat.label));
                                 container.appendChild(title);
@@ -97,7 +97,6 @@ module.exports = {
                         });
                         return container;
                     }
-                    console.log(args);
                     logging.error(new errors.InternalServerError({
                         message: 'Mobiledoc card \'' + args.env.name + '\' not found.'
                     }));
