@@ -4,6 +4,7 @@ import createComponentCard from '../utils/create-component-card';
 export const CARD_COMPONENT_MAP = {
     hr: 'koenig-card-hr',
     image: 'koenig-card-image',
+    decklist: 'tlk-decklist-card',
     markdown: 'koenig-card-markdown',
     'card-markdown': 'koenig-card-markdown', // backwards-compat with markdown editor
     html: 'koenig-card-html',
@@ -29,6 +30,7 @@ export const CARD_COMPONENT_MAP = {
 export const CARD_ICON_MAP = {
     hr: 'koenig/kg-card-type-divider',
     image: 'koenig/kg-card-type-image',
+    decklist: 'koenig/kg-card-type-decklist',
     markdown: 'koenig/kg-card-type-markdown',
     'card-markdown': 'koenig/kg-card-type-markdown',
     html: 'koenig/kg-card-type-html',
@@ -55,6 +57,7 @@ export const CARD_ICON_MAP = {
 export default [
     createComponentCard('card-markdown'), // backwards-compat with markdown editor
     createComponentCard('code'),
+    createComponentCard('decklist'),
     createComponentCard('embed', {hasEditMode: false}),
     createComponentCard('bookmark', {hasEditMode: false}),
     createComponentCard('hr', {hasEditMode: false, selectAfterInsert: false}),
@@ -81,6 +84,15 @@ export const CARD_MENU = [
         title: 'Primary',
         rowLength: 1,
         items: [{
+            label: 'Decklist',
+            icon: 'koenig/kg-card-type-decklist',
+            desc: 'Create a Decklist',
+            iconClass: 'kg-card-type-native',
+            matches: ['decklist', 'deck'],
+            type: 'card',
+            replaceArg: 'decklist',
+        },
+        {
             label: 'Image',
             icon: 'koenig/kg-card-type-image',
             desc: 'Upload, or embed with /image [url]',

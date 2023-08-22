@@ -44,6 +44,7 @@
 @import "components/browser-preview.css";
 @import "components/filter-builder.css";
 @import "components/pintura.css";
+@import "components/tlk-decklist.css";
 
 
 /* Layouts
@@ -76,6 +77,7 @@
 @import "layouts/explore.css";
 @import "layouts/mentions.css";
 @import "layouts/migrate.css";
+
 
 
 /* ---------------------------✈️----------------------------- */
