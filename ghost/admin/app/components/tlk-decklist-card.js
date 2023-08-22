@@ -102,6 +102,7 @@ export default class tlkDecklistComponent extends Component {
             this.shownCards = [];
             return res;
         });
+        this.decklistPlayerName = "";
         this.decklistName = "Decklist";
         this.recompileDecklistForHandlebars();
     }
@@ -205,7 +206,7 @@ export default class tlkDecklistComponent extends Component {
             return this.addCard(cardname, "sideboard");
         }
         if (typeline.includes("battle")) { 
-            this.addCard(cardname, "other");
+            this.addCard(cardname, "battle");
         }
         else if(typeline.includes("creature")) { 
             this.addCard(cardname, "creatures");
@@ -271,6 +272,7 @@ export default class tlkDecklistComponent extends Component {
 
     _updatePayloadAttr(attr, value) {          
         let payload = this.args.payload;
+        console.log(attr, value);
 
         set(payload, attr, value);
 
