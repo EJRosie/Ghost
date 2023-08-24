@@ -18,15 +18,7 @@ module.exports = function excerpt(options) {
     if (this.custom_excerpt) {
         excerptText = String(this.custom_excerpt);
     } else if (this.excerpt) {
-        while(true) {
-            const mtgCard = this.excerpt.match(/\[\[[^\]]*\]\]/);
-            if (!mtgCard) {
-                break;
-            }
-            const cardName = mtgCard[0].slice(2,-2);
-            this.html = this.excerpt.replace(mtgCard[0], cardName);
-        }
-        excerptText = String(this.excerpt.replace("[["));
+        excerptText = String(this.excerpt);
     } else {
         excerptText = '';
     }
