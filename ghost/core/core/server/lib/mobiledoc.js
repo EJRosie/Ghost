@@ -82,19 +82,37 @@ module.exports = {
                         var container = args.env.dom.createElement('figure');
                         container.setAttribute( "class", "tlk-decklist");
 
+                        if (payload.decklistPlayerName?.length > 0 || payload.decklistName?.length > 0) {
+                            const header = dom.createElement('div');
+                            header.setAttribute("class", "tlk-decklist-header");
+                            const title = dom.createElement('h3');
+                            title.appendChild(dom.createTextNode(payload.decklistName));
+                            header.appendChild(title);
+                            if (payload.decklistPlayerName?.length > 0) {
+                                const player = dom.createElement('h3');
+                                player.appendChild(dom.createTextNode(`By ${payload.decklistPlayerName}`));
+                                header.appendChild(player);
+                            }
+                            container.appendChild(header);
+                        }
+
+                        const decklist = dom.createElement('div');
+                        decklist.setAttribute("class", "tlk-decklist-list");
+
                         const decklistCategories = DECKLIST_CATEGORIES_MAP.map((cat) => {
                             if (cat.key in payload.decklist && Object.keys(payload.decklist[cat.key]).length > 0) {
                                 const title = dom.createElement('h3');
                                 title.appendChild(dom.createTextNode(cat.label));
-                                container.appendChild(title);
+                                decklist.appendChild(title);
                                 Object.entries(payload.decklist[cat.key]).forEach(([cardname, count]) => {
                                 const cardElement = dom.createElement('p');
-                                cardElement.appendChild(dom.createTextNode(count + "x"));
-                                cardElement.appendChild(dom.createTextNode(`[[${cardname}]]`));
-                                container.appendChild(cardElement);
+                                    cardElement.appendChild(dom.createTextNode(count + "x"));
+                                    cardElement.appendChild(dom.createTextNode(`[[${cardname}]]`));
+                                    decklist.appendChild(cardElement);
                                 });
                             }
                         });
+                        container.appendChild(decklist);
                         return container;
                     }
                     logging.error(new errors.InternalServerError({
