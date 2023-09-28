@@ -162,12 +162,14 @@ export default class KoenigToolbar extends Component {
     @action
     _createCardLink(event) {
         event?.preventDefault();
-        
+        this.toggleMarkup("i");
+
         this.editor.run((postEditor) => {
-            const cardName = postEditor._range.tail.marker.value;
-            const href = `https://deckbox.org/mtg/${cardName}`;
+            let cardName = postEditor._range.tail.marker.value;
+            let href = `https://deckbox.org/mtg/${cardName}`;
             let linkMarkup = postEditor.builder.createMarkup('a', {href});
             postEditor.toggleMarkup(linkMarkup, this.editorRange);
+            this.toggleMarkup("i");
         });
     }
 
