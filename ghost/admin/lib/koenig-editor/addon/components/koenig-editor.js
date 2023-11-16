@@ -545,6 +545,11 @@ export default class KoenigEditor extends Component {
     }
 
     @action
+    toggleCardLink(sectionTagName, postEditor) {
+        (postEditor || this.editor).toggleSection(sectionTagName);
+    }
+
+    @action
     toggleHeaderSection(headingTagName, postEditor, options = {}) {
         let editor = this.editor;
 

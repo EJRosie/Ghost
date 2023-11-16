@@ -47,6 +47,17 @@ module.exports = function content(options = {}) {
         this.html = '';
     }
 
+    //tlk: adding a quick change for any MTG Cards to be converted first:
+    // <a class="active:pointer-events-none cursor-default" href="https://deckbox.org/mtg/Lair%20of%20the%20Hydra">Lair of the Hydra</a>
+    while (true) {
+        const mtgCard = this.html.match(/\[\[[^\]]*\]\]/);
+        if (!mtgCard) {
+            break;
+        }
+        const cardName = mtgCard[0].slice(2,-2);
+        this.html = this.html.replace(mtgCard[0], `<a class="cardlink" href="https://deckbox.org/mtg/${cardName}">${cardName}</a>`); // tlk: this is a quick hack to get the MTG cards to link to deckbox.org
+    }
+
     if (!_.isUndefined(this.access) && !this.access) {
         return restrictedCta.apply(self, args);
     }

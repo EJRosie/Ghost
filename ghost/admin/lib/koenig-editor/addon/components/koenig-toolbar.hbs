@@ -73,6 +73,16 @@
             {{svg-jar "koenig/kg-link" class=(concat (if this.activeMarkupTagNames.isA "fill-green-l2" "fill-white") " w4 h4")}}
         </button>
     </li>
+    <li class="ma0 lh-solid">
+        <button
+            type="button"
+            title="Card"
+            class="dib dim-lite link h9 w9 nudge-top--1"
+            {{on "click" this._createCardLink}}
+        >
+            {{svg-jar "koenig/kg-card-type-decklist" class=(concat (if this.activeMarkupTagNames.isA "fill-green-l2" "fill-white") " w4 h4")}}
+        </button>
+    </li>
 
     {{#if @addSnippet}}
         {{#unless this.basicOnly}}
